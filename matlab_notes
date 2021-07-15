@@ -1,0 +1,30 @@
+to save a workspace: 
+save filename.mat
+to load a workspace:
+load filename.mat
+to clear a workspace :
+clear
+to clear the command pallete:
+clc
+
+built in functions and constants:
+pi, sin(), eig() {calculate eigenvalues}, abs(), sqrt("even a negative no would give a complex output")
+format long 
+format short
+[1 2 3 4] = 1:4
+linspace(first, last, number of elemnts)
+' is the sign for transpose
+
+Array Creating functions:
+rand(2) 2X2 matrix of random numbers
+
+
+indexing in matrix is not 0 based
+x(3)   gives the 3rd number
+x(2:4) gives 2nd 3rd and 4th number
+end can be passed as an index: means the last element similar to what -1 does in numpy
+if you use only one index with a matrix it will traverse down each column in order to find the index-th number 
+
+doc name_of_func opens its documentation
+
+while plotting use line specifications and line properties accordingly
