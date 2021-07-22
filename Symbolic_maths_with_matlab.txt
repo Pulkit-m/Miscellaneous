@@ -1,0 +1,124 @@
+While x and xsym both contain the value 3, they're stored differently.
+Values stored numerically are rounded to a certain precision.
+Storing them symbolically allow you to express values in exact form.
+It's easier to see the difference when storing values like fractions.
+
+Variables with a numeric data type will show the numeric value in the workspace. Symbolic data types will show up as sym.
+
+To see information on all variables in the workspace, execute:
+whos
+To see information on a specific variable, use:
+whos variable
+To view all the symbolic variables in the workspace:
+syms
+
+while creating symbolic variables do not use comma when initiating multiple symbolic Variables
+
+Expressions are stored in the workspace as symbolic variables and can be used to create other expressions.
+
+You can use the subs function to substitute a value for a symbolic variable in an expression.
+v = subs(expression,variable,value)
+
+You can also use subs to substitute for multiple variables at once.
+expn = x + y + z
+out = subs(expn,[x y z],[5 7 3])
+
+expr = x^2 + x + 1
+subs(expr,x,[1 2 3]) : this will output 3 Values
+
+
+The fplot function can be used to visualize expressions with one variable.
+fplot(expression)
+
+You can use the solve function to solve an equation for a given variable.
+solve(equation,variable)
+
+
+You can also use solve to solve a system of equations.
+In a system of equations, the equations use the same set of variables, so you have to solve all the equations at the same time.
+eqn1 = x^2 + y^2 == 1
+eqn2 = x - y == 0
+To solve the system of two equations, eqn1 and eqn2, for the variables x and y, use the syntax
+[xsol,ysol] = solve([eqn1 eqn2],[x y])
+The solutions for x and y are stored in xsol and ysol
+
+you can expand expressions using the expand function.
+newexpr = expand(expression)
+The simplify function finds a simpler form of an expression.
+newexpr = simplify(expression)
+You can find the factors of an expression using the factor function. It returns the factors as a vector.
+f = factor(expression)
+https://in.mathworks.com/help/symbolic/formula-manipulation-and-simplification.html
+
+
+If you use the assume function on a variable again, it will remove previous assumptions on that variable and replace them with the new assumption.
+To make additional assumptions on a variable, use the assumeAlso function. assumeAlso(var,'positive')
+
+To assign units, you first need to create a variable that contains a units collection. The command
+u = symunit
+uses symunit to store a units collection in the variable u.
+Once you have a units collection u, you can specify any unit usingu.unit.
+u.mile
+u.meter
+u.kg
+To apply units to numbers or variables, multiply them with the unit. For example, the following command specifies a mass of 2 grams and stores it in the variable m.
+m = 2*u.gram
+You can convert units from one unit system to another using the unitConvert function.
+newexpr = unitConvert(expression,'unitSystem')
+Common unit systems include 'SI', 'CGS' or 'US'.
+You can use the function separateUnits to extract the value and units of a variable as two separate entities.
+[value,units] = separateUnits(expression)
+
+
+Creating symbolic functions
+Symbolic functions can be used to represent mathematical functions.
+
+The syntax below creates a symbolic variable x, then creates a function g that calculates the absolute value of x and adds 3 to it:
+syms x
+g(x) = abs(x) + 3
+to evaluate g(x) at a certain x we don't even need to use the subs function
+simply use g(c)
+
+
+In addition to numeric values, you can also pass symbolic variables and expressions as arguments to symbolic functions. The output is an expression
+lets say you defined a function f(x)
+5*f ===> gives ans(x)
+5*f(x) ===> gives an expression
+
+You can use fplot to visualize symbolic functions with one independent variable.
+h(x) = abs(x) + 3
+fplot(h)
+
+also see fimplicit, fcontour
+
+
+The fsurf function visualizes a function of two variables in three dimensions by plotting a surface.
+h(x,y) = abs(x) + abs(y)
+fsurf(h)
+Surfaces can also be defined by equations. The fimplicit3 function plots the surface defined by an equation of three variables.
+fimplicit3(equation)
+
+
+You can use the diff function to take the derivative of a symbolic expression or function.
+zDeriv = diff(expn,t)
+you can use diff to find the nth derivative.
+zDerivN = diff(expn,t,n)
+
+int function to integrate (or find an anti-derivative of) a symbolic expression or function.
+For example, this command integrates the expression expr with respect to the variable t.
+zInt = int(expn,t)
+
+
+A Taylor polynomial approximates a function near a known value. You can evaluate the polynomial at nearby points to get an approximate value for the function.
+For a function f(t), you can use the taylor function to find the Taylor polynomial for f near the point t = 3.
+tpoly = taylor(f,t,3)
+you can return a higher or lower degree polynomial by specifying the truncation order.
+tpoly = taylor(f,t,3,'Order',n)
+
+SOLVING ORDINARY DIFFERENTIAL EQUATIONS
+To define a symbolic differential equation, first create the function using syms.
+syms z(t)
+Then create the equation. Use the diff function for the derivatives.
+odeq = diff(z,t) == z + 9*t
+The dsolve function is used to solve differential equations symbolically.
+sol = dsolve(diffEqn)
