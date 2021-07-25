@@ -1,0 +1,45 @@
+Importing data:
+imread
+imshow
+You can display two images together using the imshowpair function.
+imwrite
+
+Extracting color panes and intensity values:
+size
+images use the unsigned 8-bit integer (uint8) data type, which stores integers from 0 to 255
+imsplit
+montage({R,G,B})
+im2gray
+normalizing the brightness can be an important preprocessing step
+investigate the contrast in an image: imhist()
+increasing image contrast brigthens brighter pixels and darkens darker pixels
+imadjust function to adjust the contrast of a grayscale image automatically.
+
+To automate the threshold selection process, you can use the imbinarize function, 
+which calculates the "best" threshold for the image
+You can have imbinarize look at smaller portions of the image and 
+pick the best threshold for that region by passing the "adaptive" 
+option as the second argument to imbinarize.
+gBinary = imbinarize(g,"adaptive");
+
+In imbinarize, you can designate whether the foreground is bright 
+or dark by setting the "ForegroundPolarity" option.
+
+Segmentation can be improved in two ways: by preprocessing the image 
+before binarizing and by postprocessing the binary image itself.
+
+Filtering noise: Spatial filtering is a method using which we can weed out 
+certain pixels that have absurd values in comparison to their neighbors
+
+Many modern digital cameras (including mobile phone cameras) automatically 
+increase the ISO in dim light. However, this increase in sensitivity 
+amplifies noise picked up by the sensor, leaving the image grainy
+
+Use the fspecial function to create an n-by-n averaging filter.
+F = fspecial("average",n)
+You can apply a filter F to an image I by using the imfilter function.
+Ifltr = imfilter(I,F);
+
+One way to remove text from an image is to use morphological operations.
+
+
